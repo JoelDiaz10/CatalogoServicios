@@ -184,7 +184,7 @@ function queryDetalleSuccess(tx, results) {
 * vista detalle
 */
 //vista de la página de edición
-$(document).on('pagebeforeshow', '#actualizar', function(){ 
+$(document).on('pagebeforeshow', 'actualizar.html', function(){ 
 	mkLog('ID recuperado en vista actualizar: ' + $.id);
 	
 	initForm();
