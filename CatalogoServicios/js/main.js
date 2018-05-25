@@ -125,7 +125,7 @@ function cargaDatosSuccess(tx, results){
 		if(foto == ""){
 			foto = "assets/no_foto.png";
 		}
-		selector.append('<li id="li_'+persona.id+'"><a href="#detalle" data-uid='+persona.id+' class="linkDetalles"><div class="interior_lista"><img src="'+ foto +'" class="img_peq"/><span>' + persona.nombre + '</span></div></a><a href="#form"  data-theme="a" data-uid='+persona.id+'  class="linkForm">Predet.</a></li>').listview('refresh');
+		selector.append('<li id="li_'+persona.id+'"><a href="#infoService" data-uid='+persona.id+' class="linkDetalles"><div class="interior_lista"><img src="'+ foto +'" class="img_peq"/><span>' + persona.nombre + '</span></div></a><a href="#form"  data-theme="a" data-uid='+persona.id+'  class="linkForm">Predet.</a></li>').listview('refresh');
 	}
 	
 	$(".linkDetalles").click(function(e){
@@ -144,7 +144,7 @@ function cargaDatosSuccess(tx, results){
 * vista detalle ======================================MOVEEEEEERLEEEEE AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 */
 
-$(document).on("pagebeforeshow", "informacionServicio.html", function(){
+$(document).on("pagebeforeshow", "#infoService", function(){
 	if(db != null){
 		db.transaction(queryDBFindByID, errorDB);
 	}
@@ -171,9 +171,9 @@ function queryDetalleSuccess(tx, results) {
 		}
 		$("#foto_img").attr("src", _foto);
 		$("#nombre").html($.registro.nombre);
-		$("#tel").html($.registro.telefono);
+		$("#num_tel").html($.registro.telefono);
 		$("#telefono").attr("href", "tel:" + $.registro.telefono);
-		$("#email").html("Email: " + $.registro.email);
+		$("#emails").html("Email: " + $.registro.email);
 }
 
 
@@ -184,7 +184,7 @@ function queryDetalleSuccess(tx, results) {
 * vista detalle
 */
 //vista de la página de edición
-$(document).on('pagebeforeshow', 'actualizar.html', function(){ 
+$(document).on('pagebeforeshow', '#actualizar', function(){ 
 	mkLog('ID recuperado en vista actualizar: ' + $.id);
 	
 	initForm();
@@ -200,7 +200,7 @@ function queryDBFindByIDForm(tx) {
 function queryFormSuccess(tx, results) {
 	mkLog("Recibidos de la DB en vista actualizar" + results.rows.length + " registros");
 	if(results.rows.length == 0){
-		mkLog("No se han recibido registros para la vista form");
+		mkLog("No se han recibido registros para la vista actualizar");
 		navigator.notification.alert("No hay detalles para ese elemento");
 	}
 	
@@ -211,18 +211,18 @@ function queryFormSuccess(tx, results) {
 			$.imageURL = "assets/no_foto.png";
 		}
 		$("#fotoEdit_img").attr("src", $.imageURL);
-		$("#nombre").html($.registro.nombre);
-		$("#tel").html($.registro.telefono);
-		$("#email").html($.registro.email);
-		$("#domicilio").html($.registro.domicilio);
+		$("#nombreE").html($.registro.nombre);
+		$("#telE").html($.registro.telefono);
+		$("#emailE").html($.registro.email);
+		$("#domicilioE").html($.registro.domicilio);
 		
 		$("#cat_"+$.registro.categoria).trigger("click").trigger("click");	//$("#cat_"+$.registro.categoria).attr("checked",true).checkboxradio("refresh");
 		
-		$("#nota").html($.registro.nota);
+		$("#notaE").html($.registro.nota);
 		
 		
 }
-$(document).on('pagebeforeshow', 'index.html', function(){ 
+$(document).on('pagebeforeshow', '#incio', function(){ 
 	$.id = -1;
 });
 function initForm(){
@@ -270,7 +270,7 @@ function updateFormSuccess(tx) {
 	lista.append(selector).listview('refresh');
 	
 	
-	$.mobile.changePage("index.html");
+	$.mobile.changePage("#inicio");
 }
 
 
@@ -297,7 +297,7 @@ function deleteFormSuccess(tx) {
 	/*var cat = $("#cajaCategorias").find("input:checked").val();
 	var lista = $("#lista_" + cat + " ul")
 	lista.append(selector).listview('refresh');*/
-	$.mobile.changePage("index.html");
+	$.mobile.changePage("#inicio");
 }
 
 
@@ -314,7 +314,7 @@ function saveNewForm(){
 function queryDBInsertForm(tx){
 	var cat = $("#cajaCategorias").find("input:checked").val();
 	
-	tx.executeSql("INSERT INTO agenda_curso (nombre,foto,telefono,email,domicilio,categoria,nota) VALUES ('"+$("#nombre").val()+"','"+$.imageURL+"','"+$("#tel").val()+"','"+$("#email").val()+"','"+$("domicilio").val()+"','"+cat+"','"+$("#nota").val()+"')", [], newFormSuccess, errorDB);
+	tx.executeSql("INSERT INTO agenda_curso (nombre,foto,telefono,email,domicilio,categoria,nota) VALUES ('"+$("#ti_nombre").val()+"','"+$.imageURL+"','"+$("#tel").val()+"','"+$("#email").val()+"','"+$("domicilio").val()+"','"+cat+"','"+$("#nota").val()+"')", [], newFormSuccess, errorDB);
 }
 function newFormSuccess(tx, results) {
 	var cat = $("#cajaCategorias").find("input:checked").val();
@@ -332,5 +332,5 @@ function newFormSuccess(tx, results) {
 	lista.append(obj).listview('refresh');
 	
 	
-	$.mobile.changePage("index.html");
+	$.mobile.changePage("#inicio");
 }
