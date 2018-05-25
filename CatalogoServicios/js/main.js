@@ -83,7 +83,7 @@ function creaNuevaDB(tx){
 		
 	tx.executeSql(sql);
 	
-	tx.executeSql("INSERT INTO catalogo_servicios (id,nombre,foto,telefono,email,domicilio,categoria,nota) VALUES (1,'Mónica','','+6699900970','m.olivarria@ccumazatlan.mx','Hotel del Cid #5796','amigo','Prueba primer Insert PhoneGap')");
+	tx.executeSql("INSERT INTO catalogo_servicios (id,nombre,foto,telefono,email,domicilio,categoria,nota) VALUES (1,'Mónica','','+6699900970','m.olivarria@ccumazatlan.mx','Hotel del Cid #5796','amigos','Prueba primer Insert PhoneGap')");
 }
 
 
@@ -144,7 +144,7 @@ function cargaDatosSuccess(tx, results){
 * vista detalle ======================================MOVEEEEEERLEEEEE AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 */
 
-$(document).on("pagebeforeshow", "#detalle", function(){
+$(document).on("pagebeforeshow", "informacionServicio.html", function(){
 	if(db != null){
 		db.transaction(queryDBFindByID, errorDB);
 	}
@@ -184,8 +184,8 @@ function queryDetalleSuccess(tx, results) {
 * vista detalle
 */
 //vista de la página de edición
-$(document).on('pagebeforeshow', '#form', function(){ 
-	mkLog('ID recuperado en vista form: ' + $.id);
+$(document).on('pagebeforeshow', '#actualizar', function(){ 
+	mkLog('ID recuperado en vista actualizar: ' + $.id);
 	
 	initForm();
 	if(db != null && $.id != -1){
@@ -198,7 +198,7 @@ function queryDBFindByIDForm(tx) {
 }
 
 function queryFormSuccess(tx, results) {
-	mkLog("Recibidos de la DB en vista Form" + results.rows.length + " registros");
+	mkLog("Recibidos de la DB en vista actualizar" + results.rows.length + " registros");
 	if(results.rows.length == 0){
 		mkLog("No se han recibido registros para la vista form");
 		navigator.notification.alert("No hay detalles para ese elemento");
@@ -222,7 +222,7 @@ function queryFormSuccess(tx, results) {
 		
 		
 }
-$(document).on('pagebeforeshow', '#inicio', function(){ 
+$(document).on('pagebeforeshow', 'index.html', function(){ 
 	$.id = -1;
 });
 function initForm(){
@@ -270,7 +270,7 @@ function updateFormSuccess(tx) {
 	lista.append(selector).listview('refresh');
 	
 	
-	$.mobile.changePage("#inicio");
+	$.mobile.changePage("index.html");
 }
 
 
@@ -290,19 +290,14 @@ function queryDBDeleteForm(tx){
 function deleteFormSuccess(tx) {
 	
 	/*var selector = $("#li_"+$.id);
-	
 	var selector = $("#li_"+$.id).clone(true);
 	selector.find("img").attr("src", $.imageURL);
 	selector.find("a:first").find("span").html($("#nombreE").val());*/
-	
 	$("#li_"+$.id).remove();
-	
 	/*var cat = $("#cajaCategorias").find("input:checked").val();
 	var lista = $("#lista_" + cat + " ul")
 	lista.append(selector).listview('refresh');*/
-	
-	
-	$.mobile.changePage("#inicio");
+	$.mobile.changePage("index.html");
 }
 
 
@@ -337,5 +332,5 @@ function newFormSuccess(tx, results) {
 	lista.append(obj).listview('refresh');
 	
 	
-	$.mobile.changePage("#inicio");
+	$.mobile.changePage("index.html");
 }

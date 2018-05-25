@@ -2,11 +2,6 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
 <title>Agregar Servicios</title>
 <link href="jquery-mobile/jquery.mobile.theme-1.3.0.min.css" rel="stylesheet" type="text/css">
 <link href="jquery-mobile/jquery.mobile.structure-1.3.0.min.css" rel="stylesheet" type="text/css">
@@ -20,13 +15,15 @@
   <div data-role="header">
     <h1>Agregar Servicios</h1>
   </div>
-  <br><center><img src="Imagenes/AgregadoServicios.png" width="20%" alt=""/></center>
+  <center>
+  <div data-role="content">
+  <br><!--center><img src="Imagenes/AgregadoServicios.png" width="20%" alt=""/></center-->
+  
   <!--==========FOTO=============================-->
-  <canvas id="foto"></canvas>
-    <div class="button-container">
-        <button id="button-action" class="button">Tomar Foto</button>
-        <button id="button-gallery" class="button">Imagen de Galería</button>
-    </div>
+  <div class="" >
+            <div id="fotoEdit"><a href="#"><img width="10%" id="fotoEdit_img" src="assets/no_foto.png"/></a>
+            </div>
+        </div>
 <!-- FORMULARIO-->
  
   <div data-role="fieldcontain">
@@ -70,6 +67,8 @@
   <button id="btnGuardar" data-icon="plus">Agregar</button>
   <button id="btnCancelar" data-icon="delete" onClick=" window.location.href='index.html' ">Cancelar</button>
   </div></center>
+</div>
+</center>
 <!---------------------------------------------------------------------------------->
   
     <div data-role="footer" data-position="fixed">
@@ -84,7 +83,5 @@
   </div>
 </div>
 
- <script type="text/javascript" src="cordova.js"></script>
- <script type="text/javascript" src="js/camera.js"></script>
 </body>
 </html>
